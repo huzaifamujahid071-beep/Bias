@@ -214,17 +214,22 @@ function SectionIntro() {
 
 // SECTION 0 — THE ENTRANCE (Floor map / room pointers)
 const ENTRANCE_ROOMS = [
-  { number: "01", label: "The Wall", left: 10 },
-  { number: "02", label: "Build the Machine", left: 26 },
-  { number: "03", label: "Faces the System Got Wrong", left: 42 },
-  { number: "04", label: "You Are Data", left: 58 },
-  { number: "05", label: "The Showroom", left: 74 },
-  { number: "06", label: "What Comes Next", left: 90 },
+  { number: "01", label: "The Wall", left: 10, targetId: "room-1" },
+  { number: "02", label: "Build the Machine", left: 26, targetId: "room-2" },
+  { number: "03", label: "Faces the System Got Wrong", left: 42, targetId: "room-3" },
+  { number: "04", label: "You Are Data", left: 58, targetId: "room-4" },
+  { number: "05", label: "The Showroom", left: 74, targetId: "room-5" },
+  { number: "06", label: "What Comes Next", left: 90, targetId: "room-6" },
 ];
 
 function Section0Entrance() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-20%" });
+
+  const scrollToRoom = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <section
@@ -252,29 +257,32 @@ function Section0Entrance() {
         </h2>
       </motion.div>
 
-      {/* Pointers — each points down from a label to its doorway, positioned to
-          match the six evenly-spaced numbered archways (01–06, left to right)
-          in the generated entrance image. */}
+      {/* Pointers — each points down from a label to its doorway. Positions match
+          the six evenly-spaced numbered archways (01–06, left to right) in the
+          generated entrance image. Labels use a fixed width so longer room names
+          wrap onto a second line instead of stretching into neighboring labels. */}
       {ENTRANCE_ROOMS.map((room, i) => (
         <div
           key={room.number}
           className="absolute z-20 flex flex-col items-center"
           style={{ left: `${room.left}%`, top: "18%", transform: "translateX(-50%)" }}
         >
-          {/* Label */}
-          <motion.div
+          {/* Label — fixed width, clickable, scrolls to the room section */}
+          <motion.button
+            data-testid={`button-goto-${room.targetId}`}
+            onClick={() => scrollToRoom(room.targetId)}
             initial={{ opacity: 0, y: -10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-            className="flex flex-col items-center mb-2 whitespace-nowrap"
+            className="flex flex-col items-center mb-2 w-24 md:w-28 group cursor-pointer"
           >
-            <span className="terminal-text text-primary text-xs tracking-widest">
+            <span className="terminal-text text-primary text-[10px] md:text-xs tracking-widest">
               ROOM {room.number}
             </span>
-            <span className="terminal-text text-white text-xs md:text-sm tracking-wide mt-1 px-2 py-1 border border-primary/50 bg-black/60">
+            <span className="terminal-text text-white text-[10px] md:text-xs tracking-wide mt-1 px-2 py-1.5 border border-primary/50 bg-black/70 leading-tight text-center w-full group-hover:bg-primary/20 group-hover:border-primary transition-colors duration-200">
               {room.label}
             </span>
-          </motion.div>
+          </motion.button>
 
           {/* Line that "draws" downward to the doorway */}
           <motion.div
@@ -307,7 +315,7 @@ function Section1TheWall() {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="w-full bg-black border-t border-border py-24 px-6 md:px-16 lg:px-32">
+    <section ref={ref} id="room-1" className="w-full bg-black border-t border-border py-24 px-6 md:px-16 lg:px-32">
       <div className="max-w-5xl mx-auto w-full flex flex-col gap-16">
 
         {/* Room label + title */}
@@ -420,7 +428,7 @@ function Section2Build() {
   ];
 
   return (
-    <section ref={ref} className="w-full bg-background border-t border-border flex flex-col py-24 px-6 md:px-12 lg:px-24">
+    <section ref={ref} id="room-2" className="w-full bg-background border-t border-border flex flex-col py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto w-full flex flex-col gap-20">
 
         {/* Room label */}
@@ -597,7 +605,7 @@ function TerminalOutput() {
 // SECTION 3 — FACES THE SYSTEM GOT WRONG
 function Section3Faces() {
   return (
-    <section className="w-full min-h-screen bg-black border-t border-border py-24 px-6 md:px-12 lg:px-24">
+    <section id="room-3" className="w-full min-h-screen bg-black border-t border-border py-24 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="terminal-text text-primary text-sm mb-4 tracking-widest">ROOM 03 // FACES THE SYSTEM GOT WRONG</h2>
         <h3 className="text-3xl md:text-5xl font-bold text-foreground mb-16 max-w-3xl leading-tight">
@@ -666,7 +674,7 @@ function Section4Data() {
   ];
 
   return (
-    <section ref={ref} className="w-full bg-[#111] border-t border-border py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
+    <section ref={ref} id="room-4" className="w-full bg-[#111] border-t border-border py-24 px-6 md:px-12 lg:px-24 relative overflow-hidden">
       <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col gap-20">
 
         {/* Room label + heading */}
@@ -788,7 +796,7 @@ function Section5Showroom() {
   ];
 
   return (
-    <section ref={ref} className="relative w-full min-h-screen bg-black border-t border-border overflow-hidden">
+    <section ref={ref} id="room-5" className="relative w-full min-h-screen bg-black border-t border-border overflow-hidden">
       {/* Full-bleed single background image */}
       <div className="absolute inset-0">
         <img
@@ -832,7 +840,7 @@ function Section5Showroom() {
 // SECTION 6 — WHAT COMES NEXT
 function Section5Next() {
   return (
-    <section className="w-full min-h-screen bg-background border-t border-border py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-between">
+    <section id="room-6" className="w-full min-h-screen bg-background border-t border-border py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-between">
       <div className="max-w-6xl mx-auto w-full flex-grow flex flex-col">
         <h2 className="terminal-text text-primary text-sm mb-4 tracking-widest">ROOM 06 // WHAT COMES NEXT</h2>
         <h3 className="text-4xl md:text-6xl font-bold text-white mb-16">Resistance. Regulation. Reimagination.</h3>
