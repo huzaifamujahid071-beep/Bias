@@ -700,9 +700,9 @@ function Section5Showroom() {
         <img
           src={room5Image}
           alt="Humanoid robots showroom"
-          className="w-full h-full object-cover object-center opacity-30"
+          className="w-full h-full object-cover object-center opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/85 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70" />
         <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.02)_2px,rgba(255,255,255,0.02)_4px)]" />
       </div>
 
