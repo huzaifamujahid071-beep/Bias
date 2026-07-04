@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
+const room0Image = "/assets/entrance.png";
 const heroImage = "/assets/Designer_(7)_1782470455856.png";
 const logoImage = "/assets/Black_and_White_Simple_Modern_Bold_Minimalist__Logo-removebg-p_1782470751250.png";
 const room2Video = "/assets/1_1782473808147.mp4";
@@ -74,6 +75,7 @@ export default function Exhibition() {
     <main className="flex flex-col w-full">
       <Section1Hero />
       <SectionIntro />
+      <Section0Entrance />
       <Section1TheWall />
       <Section2Build />
       <Section3Faces />
@@ -205,6 +207,95 @@ function SectionIntro() {
             </motion.p>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+// SECTION 0 — THE ENTRANCE (Floor map / room pointers)
+const ENTRANCE_ROOMS = [
+  { number: "01", label: "The Wall", left: 10 },
+  { number: "02", label: "Build the Machine", left: 26 },
+  { number: "03", label: "Faces the System Got Wrong", left: 42 },
+  { number: "04", label: "You Are Data", left: 58 },
+  { number: "05", label: "The Showroom", left: 74 },
+  { number: "06", label: "What Comes Next", left: 90 },
+];
+
+function Section0Entrance() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+
+  return (
+    <section
+      ref={ref}
+      className="relative w-full h-[100dvh] bg-black border-t border-border overflow-hidden flex items-center justify-center"
+    >
+      {/* Entrance background image */}
+      <img
+        src={room0Image}
+        alt="Exhibition entrance hall with six doorways"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="absolute top-10 left-0 right-0 flex flex-col items-center z-20"
+      >
+        <span className="terminal-text text-primary text-sm tracking-widest">THE ENTRANCE</span>
+        <h2 className="text-2xl md:text-4xl font-bold text-white mt-2 tracking-tight">
+          Six Rooms. One Building.
+        </h2>
+      </motion.div>
+
+      {/* Pointers — each points down from a label to its doorway, positioned to
+          match the six evenly-spaced numbered archways (01–06, left to right)
+          in the generated entrance image. */}
+      {ENTRANCE_ROOMS.map((room, i) => (
+        <div
+          key={room.number}
+          className="absolute z-20 flex flex-col items-center"
+          style={{ left: `${room.left}%`, top: "18%", transform: "translateX(-50%)" }}
+        >
+          {/* Label */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
+            className="flex flex-col items-center mb-2 whitespace-nowrap"
+          >
+            <span className="terminal-text text-primary text-xs tracking-widest">
+              ROOM {room.number}
+            </span>
+            <span className="terminal-text text-white text-xs md:text-sm tracking-wide mt-1 px-2 py-1 border border-primary/50 bg-black/60">
+              {room.label}
+            </span>
+          </motion.div>
+
+          {/* Line that "draws" downward to the doorway */}
+          <motion.div
+            initial={{ height: 0 }}
+            animate={isInView ? { height: "28vh" } : {}}
+            transition={{ duration: 0.9, delay: 0.6 + i * 0.15, ease: "easeOut" }}
+            className="w-px bg-primary/70 shadow-[0_0_8px_rgba(226,75,74,0.6)]"
+          />
+
+          {/* Dot marking the doorway */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 1.5 + i * 0.15 }}
+            className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(226,75,74,0.9)]"
+          />
+        </div>
+      ))}
+
+      <div className="absolute bottom-10 terminal-text text-primary text-sm cursor-blink tracking-widest z-20">
+        ↓ SCROLL TO BEGIN ↓
       </div>
     </section>
   );
