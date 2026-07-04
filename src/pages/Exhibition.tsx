@@ -257,24 +257,50 @@ function Section0Entrance() {
         </h2>
       </motion.div>
 
-      {/* Pointers — each points down from a label to its doorway. Positions match
-          the six evenly-spaced numbered archways (01–06, left to right) in the
-          generated entrance image. Labels use a fixed width so longer room names
-          wrap onto a second line instead of stretching into neighboring labels. */}
+      {/* Pointers — each dot sits right at its doorway (no line crosses the room
+          number text above it). A line grows upward from a label positioned
+          below the door, ending at the dot, so it visually points up at the room. */}
       {ENTRANCE_ROOMS.map((room, i) => (
         <div
           key={room.number}
           className="absolute z-20 flex flex-col items-center"
-          style={{ left: `${room.left}%`, top: "18%", transform: "translateX(-50%)" }}
+          style={{ left: `${room.left}%`, top: "46%", transform: "translateX(-50%)" }}
         >
+          {/* Dot marking the doorway */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 1.3 + i * 0.15 }}
+            className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(226,75,74,0.9)] mb-0"
+          />
+
+          {/* Line that grows upward from the label toward the doorway dot */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: "easeOut" }}
+            style={{ height: "20vh", transformOrigin: "bottom" }}
+            className="w-px bg-primary/70 shadow-[0_0_8px_rgba(226,75,74,0.6)]"
+          />
+
+          {/* Small upward-pointing indicator right above the label */}
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 1.1 + i * 0.15 }}
+            className="text-primary text-[10px] leading-none mb-1"
+          >
+            ▲
+          </motion.span>
+
           {/* Label — fixed width, clickable, scrolls to the room section */}
           <motion.button
             data-testid={`button-goto-${room.targetId}`}
             onClick={() => scrollToRoom(room.targetId)}
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-            className="flex flex-col items-center mb-2 w-20 md:w-24 group cursor-pointer"
+            transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
+            className="flex flex-col items-center w-20 md:w-24 group cursor-pointer"
           >
             <span className="terminal-text text-primary text-[10px] md:text-xs tracking-widest">
               ROOM {room.number}
@@ -283,22 +309,6 @@ function Section0Entrance() {
               {room.label}
             </span>
           </motion.button>
-
-          {/* Line that "draws" downward to the doorway */}
-          <motion.div
-            initial={{ height: 0 }}
-            animate={isInView ? { height: "28vh" } : {}}
-            transition={{ duration: 0.9, delay: 0.6 + i * 0.15, ease: "easeOut" }}
-            className="w-px bg-primary/70 shadow-[0_0_8px_rgba(226,75,74,0.6)]"
-          />
-
-          {/* Dot marking the doorway */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 1.5 + i * 0.15 }}
-            className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(226,75,74,0.9)]"
-          />
         </div>
       ))}
 
