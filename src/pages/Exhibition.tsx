@@ -5,8 +5,7 @@ const heroImage = "/assets/Designer_(7)_1782470455856.png";
 const logoImage = "/assets/Black_and_White_Simple_Modern_Bold_Minimalist__Logo-removebg-p_1782470751250.png";
 const room2Video = "/assets/1_1782473808147.mp4";
 const room4Video = "/assets/3_1782474676282.mp4";
-const room5ImageA = "/assets/9_images_1782474949102.png";
-const room5ImageB = "/assets/8_image_1782474957429.png";
+const room5Image = "/assets/image1.png";
 const room6Image = "/assets/6_image_1782475240875.png";
 const room1ImageA = "/assets/80253fa9-7c99-4f18-8f50-2902feef002d_1782473183556.png";
 const room1ImageB = "/assets/90cf070e-2338-46c5-8c62-842f2fde5041_1782473186972.png";
@@ -83,16 +82,16 @@ export default function Exhibition() {
 function Section1Hero() {
   const [decision, setDecision] = useState(DECISION_STRINGS[0]);
   const [count, setCount] = useState(14839243);
-  
+
   useEffect(() => {
     const decInterval = setInterval(() => {
       setDecision(DECISION_STRINGS[Math.floor(Math.random() * DECISION_STRINGS.length)]);
     }, 80);
-    
+
     const countInterval = setInterval(() => {
       setCount(c => c + Math.floor(Math.random() * 50) + 800);
     }, 1000);
-    
+
     return () => {
       clearInterval(decInterval);
       clearInterval(countInterval);
@@ -115,7 +114,7 @@ function Section1Hero() {
           Artificial Intelligence.<br/>Human Error.<br/>The Future We Are Building.
         </div>
       </nav>
-      
+
       <div className="flex flex-col items-center justify-center z-10 w-full">
         <div className="h-[20vh] flex items-center justify-center w-full">
           <h1 className="terminal-text text-primary font-bold text-center glitch leading-none break-words px-4"
@@ -123,12 +122,12 @@ function Section1Hero() {
             {decision}
           </h1>
         </div>
-        
+
         <div className="mt-16 terminal-text text-white text-sm md:text-base tracking-[0.2em] opacity-80">
           [ {count.toLocaleString()} DECISIONS PROCESSED THIS SESSION ]
         </div>
       </div>
-      
+
       <div className="absolute bottom-12 terminal-text text-primary text-sm cursor-blink tracking-widest">
         ↓ ENTER THE EXHIBITION ↓
       </div>
@@ -312,7 +311,7 @@ function Section2Build() {
     if (processing) return;
     setSelections(prev => ({ ...prev, [id]: !prev[id] }));
   };
-  
+
   const handleRun = () => {
     setProcessing(true);
   };
@@ -378,7 +377,7 @@ function Section2Build() {
         {/* Interactive section */}
         <div className="flex flex-col gap-8">
           {!processing ? (
-            <button 
+            <button
               data-testid="button-run-algorithm"
               onClick={handleRun}
               className="terminal-text border border-primary text-primary px-8 py-4 hover:bg-primary hover:text-black transition-colors duration-300 tracking-widest font-bold self-start"
@@ -408,8 +407,8 @@ function DatasetRow({ title, options, selections, onToggle }: { title: string, o
               data-testid={`button-toggle-${opt.replace(/\s+/g, '-').toLowerCase()}`}
               onClick={() => onToggle(opt)}
               className={`px-4 py-3 border text-sm font-medium transition-all duration-200 ${
-                isSelected 
-                  ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(226,75,74,0.3)]' 
+                isSelected
+                  ? 'border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(226,75,74,0.3)]'
                   : 'border-border bg-card text-muted-foreground hover:border-muted-foreground'
               }`}
             >
@@ -424,7 +423,7 @@ function DatasetRow({ title, options, selections, onToggle }: { title: string, o
 
 function TerminalOutput() {
   const [step, setStep] = useState(0);
-  
+
   useEffect(() => {
     const timers = [
       setTimeout(() => setStep(1), 500),
@@ -448,15 +447,15 @@ function TerminalOutput() {
         {step >= 5 && <div className="text-primary">{">"} BIAS INDEX: [████████░░] 78% SKEWED</div>}
         {step >= 6 && <div className="mt-4">{">"} MODEL TRAINED. DEPLOYING TO PRODUCTION. <span className="cursor-blink">_</span></div>}
       </div>
-      
+
       {step >= 6 && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="border border-border p-8 bg-card"
         >
           <h4 className="terminal-text text-white mb-8 text-xl">BIAS EMERGENCE</h4>
-          
+
           <div className="space-y-6">
             <div>
               <div className="flex justify-between terminal-text text-xs text-muted-foreground mb-2">
@@ -464,7 +463,7 @@ function TerminalOutput() {
                 <span>87% APPROVAL</span>
               </div>
               <div className="w-full h-8 bg-black border border-border">
-                <motion.div 
+                <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: "87%" }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
@@ -472,14 +471,14 @@ function TerminalOutput() {
                 />
               </div>
             </div>
-            
+
             <div>
               <div className="flex justify-between terminal-text text-xs text-primary mb-2">
                 <span>GROUP B</span>
                 <span>34% APPROVAL</span>
               </div>
               <div className="w-full h-8 bg-black border border-border relative">
-                <motion.div 
+                <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: "34%" }}
                   transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
@@ -488,7 +487,7 @@ function TerminalOutput() {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-8 terminal-text text-primary text-center text-sm tracking-widest border-t border-border pt-4">
             SAME QUALIFICATIONS. DIFFERENT OUTCOMES.
           </div>
@@ -507,7 +506,7 @@ function Section3Faces() {
         <h3 className="text-3xl md:text-5xl font-bold text-foreground mb-16 max-w-3xl leading-tight">
           These are real documented cases of algorithmic misidentification.
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {WRONG_FACES.map((face) => (
             <div key={face.id} className="relative aspect-[3/4] bg-card border border-border overflow-hidden group">
@@ -520,16 +519,16 @@ function Section3Faces() {
                   {face.id % 3 === 0 && <polygon points="50,30 40,50 60,50" className="opacity-50" />}
                 </svg>
               </div>
-              
+
               {/* Scanline specifically for card */}
               <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.03)_2px,rgba(255,255,255,0.03)_4px)]" />
-              
+
               {/* Default State - Red Overlay */}
               <div className="absolute inset-0 bg-primary/20 backdrop-blur-sm border-2 border-primary p-6 flex flex-col justify-end transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full">
                 <div className="terminal-text text-primary font-bold text-xl mb-2">{face.overlay}</div>
                 <div className="terminal-text text-white text-xs opacity-80">AI CLASSIFICATION</div>
               </div>
-              
+
               {/* Hover State - Story */}
               <div className="absolute inset-0 bg-white text-black p-8 flex flex-col justify-center translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0">
                 <p className="font-sans text-lg font-medium leading-relaxed">
@@ -550,11 +549,11 @@ function Section4Data() {
   const [scanning, setScanning] = useState(true);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
-  
+
   useEffect(() => {
     if (isInView) {
       setTimeout(() => setScanning(false), 2500);
-      
+
       setData({
         device: navigator.platform || "UNKNOWN_DEVICE",
         browser: navigator.userAgent.substring(0, 40) + "...",
@@ -626,12 +625,12 @@ function Section4Data() {
 
         {/* Scanning / terminal interactive section */}
         <div className="max-w-4xl w-full mx-auto">
-        
+
         {scanning ? (
           <div className="h-[60vh] flex items-center justify-center relative border border-border bg-black overflow-hidden">
             <div className="absolute inset-0 bg-primary/5 scan-animation w-full h-[2px] shadow-[0_0_20px_rgba(226,75,74,1)] z-20" />
             <h3 className="terminal-text text-4xl md:text-6xl text-primary animate-pulse tracking-widest">SCANNING...</h3>
-            
+
             {/* Fake biometric wireframe */}
             <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                <svg viewBox="0 0 100 100" className="w-64 h-64 text-primary fill-none stroke-current stroke-[0.5]">
@@ -643,7 +642,7 @@ function Section4Data() {
             </div>
           </div>
         ) : (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex flex-col space-y-12"
@@ -664,7 +663,7 @@ function Section4Data() {
               <div className="typewriter-line text-primary" style={{ animationDelay: '2.5s' }}>&gt; INSURANCE RISK: ELEVATED</div>
               <div className="typewriter-line text-primary" style={{ animationDelay: '2.7s' }}>&gt; CREDIT RECOMMENDATION: REVIEW REQUIRED <span className="cursor-blink">_</span></div>
             </div>
-            
+
             <div className="text-center space-y-6">
               <p className="text-xl md:text-2xl font-bold text-white max-w-2xl mx-auto leading-relaxed">
                 AI systems profile you without your knowledge or consent. Every device you use, every search you make, every purchase you consider — collected, scored, sold.
@@ -695,8 +694,19 @@ function Section5Showroom() {
   ];
 
   return (
-    <section ref={ref} className="w-full bg-background border-t border-border py-24 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto w-full flex flex-col gap-20">
+    <section ref={ref} className="relative w-full min-h-screen bg-black border-t border-border overflow-hidden">
+      {/* Full-bleed single background image */}
+      <div className="absolute inset-0">
+        <img
+          src={room5Image}
+          alt="Humanoid robots showroom"
+          className="w-full h-full object-cover object-center opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/85 to-black" />
+        <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.02)_2px,rgba(255,255,255,0.02)_4px)]" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto w-full py-24 px-6 md:px-12 lg:px-24 flex flex-col gap-16">
 
         {/* Room label + heading */}
         <motion.div
@@ -708,41 +718,17 @@ function Section5Showroom() {
           <h2 className="text-4xl md:text-6xl font-bold text-foreground mt-4 leading-tight">The Showroom.</h2>
         </motion.div>
 
-        {/* Text LEFT — Image RIGHT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex flex-col gap-6"
-          >
-            {bodyText.map((p, i) => (
-              <p key={i} className="text-white/80 text-base md:text-lg leading-relaxed">{p}</p>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex flex-col gap-4"
-          >
-            <div className="border border-border bg-card overflow-hidden">
-              <img
-                src={room5ImageA}
-                alt="Humanoid robots on display pedestals in a showroom"
-                className="w-full h-auto object-contain block"
-              />
-            </div>
-            <div className="border border-border bg-card overflow-hidden">
-              <img
-                src={room5ImageB}
-                alt="AI systems showroom with visitors"
-                className="w-full h-auto object-contain block"
-              />
-            </div>
-          </motion.div>
-        </div>
+        {/* Body text — full width, image is now just the section backdrop */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="flex flex-col gap-6 max-w-2xl"
+        >
+          {bodyText.map((p, i) => (
+            <p key={i} className="text-white/80 text-base md:text-lg leading-relaxed">{p}</p>
+          ))}
+        </motion.div>
 
       </div>
     </section>
@@ -756,13 +742,13 @@ function Section5Next() {
       <div className="max-w-6xl mx-auto w-full flex-grow flex flex-col">
         <h2 className="terminal-text text-primary text-sm mb-4 tracking-widest">ROOM 06 // WHAT COMES NEXT</h2>
         <h3 className="text-4xl md:text-6xl font-bold text-white mb-16">Resistance. Regulation. Reimagination.</h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           <Card title="THE EU AI ACT" content="The world's first comprehensive AI regulation. Bans predictive policing AI, biometric surveillance in public spaces, and social scoring systems. Enforced penalties up to €35 million." />
           <Card title="THE ALGORITHMIC JUSTICE LEAGUE" content="Founded by Joy Buolamwini after MIT research found facial recognition misidentified dark-skinned women 34.7% more often than light-skinned men. Fighting AI bias in courts and boardrooms." />
           <Card title="THE RIGHT TO EXPLANATION" content="Under GDPR Article 22, EU citizens can demand a human review of any automated decision affecting them. A legal right to challenge the machine." />
         </div>
-        
+
         <div className="flex justify-center mb-16">
           <div className="border border-border bg-card overflow-hidden w-full max-w-2xl">
             <img
@@ -778,9 +764,9 @@ function Section5Next() {
           <p className="text-lg text-white/80 max-w-2xl mb-10 leading-relaxed">
             AI systems that make life-altering decisions must be transparent, auditable, and contestable. Join the movement for algorithmic justice.
           </p>
-          <a 
-            href="/ticket.png" 
-            target="_blank" 
+          <a
+            href="/ticket.png"
+            target="_blank"
             rel="noopener noreferrer"
             data-testid="link-ajl"
             className="terminal-text bg-primary text-black font-bold px-10 py-5 hover:bg-white transition-colors duration-300 tracking-widest"
@@ -788,21 +774,21 @@ function Section5Next() {
             BUY THE TICKET NOW →
           </a>
         </div>
-        
+
         <div className="flex flex-col items-center justify-center opacity-50 hover:opacity-100 transition-opacity mb-24">
           <svg width="100" height="100" viewBox="0 0 100 100" className="fill-white mb-4">
             <rect x="10" y="10" width="30" height="30" />
             <rect x="15" y="15" width="20" height="20" fill="#1A1A2E" />
             <rect x="20" y="20" width="10" height="10" />
-            
+
             <rect x="60" y="10" width="30" height="30" />
             <rect x="65" y="15" width="20" height="20" fill="#1A1A2E" />
             <rect x="70" y="20" width="10" height="10" />
-            
+
             <rect x="10" y="60" width="30" height="30" />
             <rect x="15" y="65" width="20" height="20" fill="#1A1A2E" />
             <rect x="20" y="70" width="10" height="10" />
-            
+
             <rect x="60" y="60" width="10" height="10" />
             <rect x="80" y="60" width="10" height="10" />
             <rect x="60" y="80" width="30" height="10" />
@@ -811,7 +797,7 @@ function Section5Next() {
           <div className="terminal-text text-xs tracking-widest text-white">SCAN TO TAKE ACTION</div>
         </div>
       </div>
-      
+
       <footer className="w-full border-t border-white/10 pt-8 mt-12 pb-4 text-center">
         <p className="terminal-text text-white/40 text-xs tracking-[0.2em]">
           BIAS.EXE — AN EXHIBITION ABOUT THE FUTURE WE ARE BUILDING // © 2026
