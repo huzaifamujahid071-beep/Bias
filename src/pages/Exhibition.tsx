@@ -33,31 +33,37 @@ const DECISION_STRINGS = [
 const WRONG_FACES = [
   {
     id: 1,
+    image: "/assets/robert.png",
     overlay: "THREAT LEVEL: HIGH",
     story: "Robert Williams, Detroit 2020. Wrongly arrested based on facial recognition match. Held 30 hours. Algorithm was 96% confident. It was wrong."
   },
   {
     id: 2,
+    image: "/assets/nijeel.png",
     overlay: "IDENTITY: UNVERIFIED",
     story: "Nijeer Parks, New Jersey 2019. Jailed for 10 days for a shoplifting he didn't commit. A facial recognition algorithm identified him from grainy footage."
   },
   {
     id: 3,
+    image: "/assets/oliver.png",
     overlay: "RISK SCORE: 96/100",
     story: "Michael Oliver, Detroit 2020. Arrested based on a partial face match. The algorithm flagged him from a low-resolution photo. No resemblance."
   },
   {
     id: 4,
+    image: "/assets/porcha.png",
     overlay: "MATCH CONFIDENCE: 99.1%",
     story: "Porcha Woodruff, Detroit 2023. Eight months pregnant. Arrested at home based on a facial recognition match to a suspect. Miscarriage risk. Algorithm error."
   },
   {
     id: 5,
+    image: "/assets/randal.png",
     overlay: "SUBJECT: FLAGGED",
     story: "Randal Reid, Georgia 2022. Arrested in a state he'd never visited. Algorithm matched him to a theft suspect from surveillance footage. Wrong man."
   },
   {
     id: 6,
+    image: "/assets/alonzo.png",
     overlay: "CRIMINAL PROBABILITY: 87%",
     story: "Alonzo Sawyer, Maryland 2023. Detained at airport. Flagged by AI screening system. Cleared after 4 hours. No explanation given."
   }
@@ -510,15 +516,12 @@ function Section3Faces() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {WRONG_FACES.map((face) => (
             <div key={face.id} className="relative aspect-[3/4] bg-card border border-border overflow-hidden group">
-              {/* Abstract Face SVG */}
-              <div className="absolute inset-0 flex items-center justify-center p-8 opacity-40">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-white/20 fill-current">
-                  <circle cx="50" cy="40" r="25" />
-                  <path d="M 20 100 Q 50 70 80 100 Z" />
-                  {face.id % 2 === 0 && <rect x="35" y="30" width="30" height="10" className="opacity-50" />}
-                  {face.id % 3 === 0 && <polygon points="50,30 40,50 60,50" className="opacity-50" />}
-                </svg>
-              </div>
+              {/* Victim photo */}
+              <img
+                src={face.image}
+                alt={face.overlay}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
 
               {/* Scanline specifically for card */}
               <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.03)_2px,rgba(255,255,255,0.03)_4px)]" />
