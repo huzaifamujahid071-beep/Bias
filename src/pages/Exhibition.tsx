@@ -264,9 +264,9 @@ function Section0Entrance() {
         <div
           key={room.number}
           className="absolute z-20 flex flex-col items-center"
-          style={{ left: `${room.left}%`, top: "46%", transform: "translateX(-50%)" }}
+          style={{ left: `${room.left}%`, top: "62%", transform: "translateX(-50%)" }}
         >
-          {/* Dot marking the doorway */}
+          {/* Dot marking the doorway (lower, below the door opening) */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={isInView ? { scale: 1, opacity: 1 } : {}}
@@ -274,12 +274,12 @@ function Section0Entrance() {
             className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_rgba(226,75,74,0.9)] mb-0"
           />
 
-          {/* Line that grows upward from the label toward the doorway dot */}
+          {/* Short line that grows upward from the label toward the dot */}
           <motion.div
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: "easeOut" }}
-            style={{ height: "20vh", transformOrigin: "bottom" }}
+            transition={{ duration: 0.6, delay: 0.5 + i * 0.15, ease: "easeOut" }}
+            style={{ height: "8vh", transformOrigin: "bottom" }}
             className="w-px bg-primary/70 shadow-[0_0_8px_rgba(226,75,74,0.6)]"
           />
 
