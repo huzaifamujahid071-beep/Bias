@@ -214,12 +214,12 @@ function SectionIntro() {
 
 // SECTION 0 — THE ENTRANCE (Floor map / room pointers)
 const ENTRANCE_ROOMS = [
-  { number: "01", label: "The Wall", left: 10, targetId: "room-1" },
-  { number: "02", label: "Build the Machine", left: 26, targetId: "room-2" },
-  { number: "03", label: "Faces the System Got Wrong", left: 42, targetId: "room-3" },
-  { number: "04", label: "You Are Data", left: 58, targetId: "room-4" },
-  { number: "05", label: "The Showroom", left: 74, targetId: "room-5" },
-  { number: "06", label: "What Comes Next", left: 90, targetId: "room-6" },
+  { number: "01", label: "The Wall", left: 24, targetId: "room-1" },
+  { number: "02", label: "Build the Machine", left: 34, targetId: "room-2" },
+  { number: "03", label: "Faces the System Got Wrong", left: 45, targetId: "room-3" },
+  { number: "04", label: "You Are Data", left: 56, targetId: "room-4" },
+  { number: "05", label: "The Showroom", left: 66, targetId: "room-5" },
+  { number: "06", label: "What Comes Next", left: 77, targetId: "room-6" },
 ];
 
 function Section0Entrance() {
@@ -274,7 +274,7 @@ function Section0Entrance() {
             initial={{ opacity: 0, y: -10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-            className="flex flex-col items-center mb-2 w-24 md:w-28 group cursor-pointer"
+            className="flex flex-col items-center mb-2 w-20 md:w-24 group cursor-pointer"
           >
             <span className="terminal-text text-primary text-[10px] md:text-xs tracking-widest">
               ROOM {room.number}
