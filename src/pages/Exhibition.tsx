@@ -279,7 +279,7 @@ function Section0Entrance() {
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5 + i * 0.15, ease: "easeOut" }}
-            style={{ height: "8vh", transformOrigin: "bottom" }}
+            style={{ height: "12vh", transformOrigin: "bottom" }}
             className="w-px bg-primary/70 shadow-[0_0_8px_rgba(226,75,74,0.6)]"
           />
 
